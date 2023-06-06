@@ -15,13 +15,6 @@ steps:
   inputs:
     PathtoPublish: $(build.artifactstagingdirectory)
     ArtifactName: 'PublishBuildArtifacts'
-
-- task: DownloadBuildArtifacts@0
-  inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'PublishBuildArtifacts'
-    downloadPath: '$(System.ArtifactsDirectory)'
   
 - task: CopyFiles@2
   displayName: 'Copy deployment file to bastion server'
