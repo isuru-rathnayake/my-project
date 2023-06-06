@@ -10,8 +10,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: Deploying flask app
-  displayName: 'Deploy flask app in k8s cluster'
 
 - task: CopyFiles@2
   displayName: 'Copy deployment file to bastion server'
