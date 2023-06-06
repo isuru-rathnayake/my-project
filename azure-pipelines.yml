@@ -29,18 +29,12 @@ steps:
     sourceFolder: '$(Build.ArtifactStagingDirectory)' 
     contents: 'flask-app-deployment.yaml' 
     targetFolder: '/home/azureuser/flask-demo-app' 
-#- task: SSH@0
-#  displayName: 'Copy deployment file to bastion server'
-#  inputs:
-#    sshEndpoint: 'bastion-server'
-#    runOptions: 'commands'
-#    commands: |
-#      scp $(Build.ArtifactStagingDirectory)/deployment/flask-app-deployment.yaml azureuser@ccp-pulse-dev-bastion.canadacentral.cloudapp.azure.com:/home/azureuser/flask-demo-app/flask-app-deployment.yaml
-
-- task: KubernetesManifest@0
-  displayName: 'Apply K8s deployment'
+- task: SSH@0
+  displayName: 'Copy deployment file to bastion server'
   inputs:
-    connectionType: 'None'
-    command: 'apply'
-    arguments: '-f /home/azureuser/flask-demo-app/flask-app-deployment.yaml'
-    secrets: 'isuru-rathnayake'
+    sshEndpoint: 'bastion-server'
+    runOptions: 'commands'
+    commands: |
+      ls /home/azureuser/flask-demo-app/ -l
+      kubectl apply -f /home/azureuser/flask-demo-app/flask-app-deployment.yaml
+
