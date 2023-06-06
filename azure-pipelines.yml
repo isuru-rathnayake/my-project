@@ -16,11 +16,12 @@ steps:
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: 'flask-app-deployment.yaml'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/deployment'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    
 - task: CopyFilesOverSSH@0
   inputs:
     sshEndpoint: 'bastion-server'
-    sourceFolder: $(Build.ArtifactStagingDirectory)/deployment/' 
+    sourceFolder: $(Build.ArtifactStagingDirectory)' 
     contents: 'flask-app-deployment.yaml' 
     targetFolder: '/home/azureuser/flask-demo-app' 
 #- task: SSH@0
