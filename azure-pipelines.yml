@@ -12,14 +12,6 @@ pool:
 steps:
 - script: Deploying flask app
   displayName: 'Deploy flask app in k8s cluster'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-    echo $(Build.ArtifactStagingDirectory)
-    ls -la
-    pwd
-  displayName: 'Run a multi-line script'
   
 - task: CopyFiles@2
   displayName: 'Copy deployment file to bastion server'
@@ -41,5 +33,5 @@ steps:
   inputs:
     connectionType: 'None'
     command: 'apply'
-    arguments: '-f /home/azureuser/flask-demo-app/flask.yaml'
+    arguments: '-f /home/azureuser/flask-demo-app/flask-app-deployment.yaml'
     secrets: 'isuru-rathnayake'
