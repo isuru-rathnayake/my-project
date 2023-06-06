@@ -18,19 +18,19 @@ steps:
     Contents: 'flask-app-deployment.yaml'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
-- task: CopyFilesOverSSH@0
-  inputs:
-    sshEndpoint: 'bastion-server'
-    sourceFolder: $(Build.ArtifactStagingDirectory)' 
-    contents: 'flask-app-deployment.yaml' 
-    targetFolder: '/home/azureuser/flask-demo-app' 
-#- task: SSH@0
-#  displayName: 'Copy deployment file to bastion server'
+#- task: CopyFilesOverSSH@0
 #  inputs:
 #    sshEndpoint: 'bastion-server'
-#    runOptions: 'commands'
-#    commands: |
-#      scp $(Build.ArtifactStagingDirectory)/deployment/flask-app-deployment.yaml azureuser@ccp-pulse-dev-bastion.canadacentral.cloudapp.azure.com:/home/azureuser/flask-demo-app/flask-app-deployment.yaml
+#    sourceFolder: $(Build.ArtifactStagingDirectory)' 
+#    contents: 'flask-app-deployment.yaml' 
+#    targetFolder: '/home/azureuser/flask-demo-app' 
+- task: SSH@0
+  displayName: 'Copy deployment file to bastion server'
+  inputs:
+    sshEndpoint: 'bastion-server'
+    runOptions: 'commands'
+    commands: |
+      scp $(Build.ArtifactStagingDirectory)/deployment/flask-app-deployment.yaml azureuser@ccp-pulse-dev-bastion.canadacentral.cloudapp.azure.com:/home/azureuser/flask-demo-app/flask-app-deployment.yaml
 
 - task: KubernetesManifest@0
   displayName: 'Apply K8s deployment'
