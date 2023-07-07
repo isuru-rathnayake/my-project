@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-db
+  namespace: demo-app-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app-db
+  template:
+    metadata:
+      labels:
+        app: flask-app-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7.42
+          ports:
+            - containerPort: 3306
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-db
+  namespace: demo-app-flask
+spec:
+  selector:
+    app: flask-app-db
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  type: LoadBalancer
