@@ -23,14 +23,14 @@ spec:
             httpGet:
               path: /hello
               port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 10
+            initialDelaySeconds: 5
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /hello
               port: 80
-          initialDelaySeconds: 15
-          periodSeconds: 20
+            initialDelaySeconds: 15
+            periodSeconds: 20
 
 ---
 apiVersion: v1
