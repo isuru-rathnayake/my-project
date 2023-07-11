@@ -37,4 +37,6 @@ steps:
     commands: |
       ls /home/azureuser/flask-demo-app/ -l
       kubectl apply -f /home/azureuser/flask-demo-app/flask-app-deployment.yaml
+      kubectl apply -f /home/azureuser/flask-demo-app/mysql-database.yaml
+      kubectl apply -f /home/azureuser/flask-demo-app/network-policy-db.yaml
 
