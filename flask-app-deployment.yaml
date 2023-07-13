@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: flask-app-deployment
   namespace: demo-app-flask
+  annotations:
+  container.apparmor.security.beta.kubernetes.io/flask-app: localhost/k8s-apparmor-example-deny-write
 spec:
   replicas: 1
   selector:
@@ -17,6 +19,8 @@ spec:
       securityContext:
         runAsUser: 2001
         fsGroup: 3001
+      nodeSelector:
+        aa: app_armor
       containers:
         - name: flask-app
           image: ccpcontainerregistry.azurecr.io/flask-app:13
