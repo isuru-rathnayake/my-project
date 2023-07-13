@@ -14,14 +14,14 @@ spec:
       labels:
         app: flask-app
     spec:
+      securityContext:
+        runAsUser: 2001
+        fsGroup: 3001
       containers:
         - name: flask-app
           image: ccpcontainerregistry.azurecr.io/flask-app:13
           securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 2001
-            fsGroup: 3001
-            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false            
           ports:  
             - containerPort: 80
           readinessProbe:
